@@ -1,0 +1,170 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+MERGED from [com.android.support:design:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/54f663a1f1f93075ca03a25d77df6aba/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/bae1ad3a4ed45908474f91948c1e374e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/kelson/.gradle/caches/transforms-2/files-2.1/8dd560ac86803862241652c75dae4610/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/7b60638e8acf33843687aba0bce96012/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/23e0f0c5f74752c8e10387a64d79c7a6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/bb5ca574e810fa2910cba36fe99676ff/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/f5d341e2c9e85dd5e1422b3e6289b5e1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/6aa2ffa7d4e4ae38a2ab69795acd6452/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/4ccb6576693a62fb777031ad4f8bf0b2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/e2e2fa15da595fc3e1877266b5cbb355/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/b515c5ee5f0ab927eb7c97fea8362309/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/303509a3f3cabfd2fd8d438307035456/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/b6a9d4e207b5f8633c4f146728301e63/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/35612b42c5e36398fde05ebd9728a3f8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a91e59d02f74114bbe831d5b047e28b3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8ba25d2514ca6641cabdab1fe687469/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0cc6dd9ae791a21c54d1a02da56fcfb6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/cbba149c06a02d6f07b84512887019d8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8c233219e92f3ae61d9e9536be329ae/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/d5a2643db9fbfb10e1ea70159c19a6d7/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a20de657a814f02b34dbfd69499ec25d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/7c00dd7a8af5979a1e1984dfe0ccf41b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/f965efa70333c16a660cb4e541134a22/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/da67714d2fe75698e8560168e0092fe9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/4e0c6fb8b582aa7b7dfcffb5d55fc223/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0ea3c1c0fd0fef026217dae8eda5c5c2/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0d4f5d3ecbf35a8fa46e73c7ac14bbcb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a82f514bd408c4ef426437f94458601a/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/9a1c0734f44be17c7ba980d8fb676904/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/eb0bb2c5cd74ad0e5638cbb779987cba/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c355745426662df2fcaf78ea92a63891/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+	package
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:3:5-38
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:1-23:12
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:5:5-21:19
+MERGED from [com.android.support:design:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/54f663a1f1f93075ca03a25d77df6aba/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/54f663a1f1f93075ca03a25d77df6aba/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/kelson/.gradle/caches/transforms-2/files-2.1/8dd560ac86803862241652c75dae4610/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/kelson/.gradle/caches/transforms-2/files-2.1/8dd560ac86803862241652c75dae4610/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8c233219e92f3ae61d9e9536be329ae/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8c233219e92f3ae61d9e9536be329ae/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/d5a2643db9fbfb10e1ea70159c19a6d7/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/d5a2643db9fbfb10e1ea70159c19a6d7/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8c233219e92f3ae61d9e9536be329ae/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.nature_hunt.MainActivity
+ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:12:9-20:20
+	android:label
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:14:13-45
+	android:name
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:13:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml:18:27-74
+uses-sdk
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/54f663a1f1f93075ca03a25d77df6aba/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/54f663a1f1f93075ca03a25d77df6aba/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/bae1ad3a4ed45908474f91948c1e374e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/bae1ad3a4ed45908474f91948c1e374e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/kelson/.gradle/caches/transforms-2/files-2.1/8dd560ac86803862241652c75dae4610/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/kelson/.gradle/caches/transforms-2/files-2.1/8dd560ac86803862241652c75dae4610/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/7b60638e8acf33843687aba0bce96012/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/7b60638e8acf33843687aba0bce96012/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/23e0f0c5f74752c8e10387a64d79c7a6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/23e0f0c5f74752c8e10387a64d79c7a6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/bb5ca574e810fa2910cba36fe99676ff/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/bb5ca574e810fa2910cba36fe99676ff/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/f5d341e2c9e85dd5e1422b3e6289b5e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/f5d341e2c9e85dd5e1422b3e6289b5e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/6aa2ffa7d4e4ae38a2ab69795acd6452/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/6aa2ffa7d4e4ae38a2ab69795acd6452/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/4ccb6576693a62fb777031ad4f8bf0b2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/4ccb6576693a62fb777031ad4f8bf0b2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/e2e2fa15da595fc3e1877266b5cbb355/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/e2e2fa15da595fc3e1877266b5cbb355/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/b515c5ee5f0ab927eb7c97fea8362309/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/b515c5ee5f0ab927eb7c97fea8362309/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/303509a3f3cabfd2fd8d438307035456/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/303509a3f3cabfd2fd8d438307035456/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/b6a9d4e207b5f8633c4f146728301e63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/b6a9d4e207b5f8633c4f146728301e63/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/35612b42c5e36398fde05ebd9728a3f8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/35612b42c5e36398fde05ebd9728a3f8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a91e59d02f74114bbe831d5b047e28b3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a91e59d02f74114bbe831d5b047e28b3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8ba25d2514ca6641cabdab1fe687469/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8ba25d2514ca6641cabdab1fe687469/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0cc6dd9ae791a21c54d1a02da56fcfb6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0cc6dd9ae791a21c54d1a02da56fcfb6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/cbba149c06a02d6f07b84512887019d8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/cbba149c06a02d6f07b84512887019d8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8c233219e92f3ae61d9e9536be329ae/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c8c233219e92f3ae61d9e9536be329ae/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/d5a2643db9fbfb10e1ea70159c19a6d7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/d5a2643db9fbfb10e1ea70159c19a6d7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a20de657a814f02b34dbfd69499ec25d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a20de657a814f02b34dbfd69499ec25d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/7c00dd7a8af5979a1e1984dfe0ccf41b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/7c00dd7a8af5979a1e1984dfe0ccf41b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/f965efa70333c16a660cb4e541134a22/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/f965efa70333c16a660cb4e541134a22/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/da67714d2fe75698e8560168e0092fe9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/da67714d2fe75698e8560168e0092fe9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/4e0c6fb8b582aa7b7dfcffb5d55fc223/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/4e0c6fb8b582aa7b7dfcffb5d55fc223/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0ea3c1c0fd0fef026217dae8eda5c5c2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0ea3c1c0fd0fef026217dae8eda5c5c2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0d4f5d3ecbf35a8fa46e73c7ac14bbcb/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/0d4f5d3ecbf35a8fa46e73c7ac14bbcb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a82f514bd408c4ef426437f94458601a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/kelson/.gradle/caches/transforms-2/files-2.1/a82f514bd408c4ef426437f94458601a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/9a1c0734f44be17c7ba980d8fb676904/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/9a1c0734f44be17c7ba980d8fb676904/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/eb0bb2c5cd74ad0e5638cbb779987cba/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/eb0bb2c5cd74ad0e5638cbb779987cba/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c355745426662df2fcaf78ea92a63891/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/kelson/.gradle/caches/transforms-2/files-2.1/c355745426662df2fcaf78ea92a63891/AndroidManifest.xml:20:5-44
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/kelson/Android Projects/Nature_Hunt/app/src/main/AndroidManifest.xml
