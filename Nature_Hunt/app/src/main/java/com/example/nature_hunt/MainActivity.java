@@ -227,8 +227,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class UploadFileTask extends AsyncTask<PostParams, Integer, String>{
+    private class UploadFileTask extends AsyncTask<PostParams, Integer, String> {
         Context context;
+
         protected String doInBackground(PostParams... params) {
             context = params[0].context;
             String filePath = params[0].filePath;
@@ -247,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... progress) {
 //            setProgressPercent(progress[0]);
         }
+
         protected void onPostExecute(String result) {
             System.out.println(result);
             String confidence = "";
@@ -254,17 +256,19 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject jObject = new JSONObject(result);
                 JSONArray jArray = jObject.getJSONArray("predictions");
-                for(int i = 0; i < jArray.length(); i++){
+                for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jObject2 = jArray.getJSONObject(i);
                     confidence = jObject2.getString("confidence");
                     species_common = jObject2.getString("species_common");
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
             toast.show();
+        }
+    }
+
     private void PopulateHuntSearchList() {
 
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
