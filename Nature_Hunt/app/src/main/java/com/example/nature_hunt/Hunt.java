@@ -1,7 +1,6 @@
 package com.example.nature_hunt;
 
 import android.util.Pair;
-import android.util.Property;
 
 import java.util.ArrayList;
 
