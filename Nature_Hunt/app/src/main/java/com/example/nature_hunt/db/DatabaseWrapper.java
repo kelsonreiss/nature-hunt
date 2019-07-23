@@ -30,6 +30,7 @@ public class DatabaseWrapper  extends DatabaseAccessor{
         MobileServiceList<Hunt> huntsDB = huntTable.execute().get();
 
         // Get the HuntSpeciesMap to get species list corresponding to each hunt
+        // TODO: Uncomment when get() for the other tables works
         // Map<Integer, ArrayList<Species>> huntSpeciesMap = getHuntSpeciesMap();
 
         // Loop through all the DB records to populate the Hunts map

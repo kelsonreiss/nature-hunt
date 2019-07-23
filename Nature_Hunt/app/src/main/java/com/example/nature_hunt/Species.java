@@ -1,8 +1,5 @@
 package com.example.nature_hunt;
 
-
-import java.util.Optional;
-
 /**
  * Class representing an individual species
  */
