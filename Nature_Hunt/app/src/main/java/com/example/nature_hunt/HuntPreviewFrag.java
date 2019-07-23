@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,6 +33,7 @@ public class HuntPreviewFrag extends DialogFragment {
     private ImageView imageView;
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
+    private Hunt mHunt;
 
     Integer[] imageIDs = {
             R.mipmap.stock_trail,
@@ -46,7 +48,6 @@ public class HuntPreviewFrag extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogStyle);
     }
 
@@ -54,8 +55,20 @@ public class HuntPreviewFrag extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view =  inflater.inflate(R.layout.hunt_preview_fragment_2, container, false);
 
+        View view =  inflater.inflate(R.layout.hunt_preview_fragment_2, container, false);
+        try {
+            mHunt = (Hunt) getArguments().getSerializable("hunt");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if (mHunt != null){
+            // Set title data
+            TextView title = (TextView) view.findViewById(R.id.hunt_title);
+            title.setText(mHunt.name());
+        }
+        
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.dismiss_preview_button);
 
         // Made dismiss button transparent
@@ -65,10 +78,7 @@ public class HuntPreviewFrag extends DialogFragment {
                 dismiss();
             }
         });
-        //imageView = (ImageView) view.findViewById(R.id.species_preview_image);
         recyclerView = (RecyclerView) view.findViewById(R.id.species_image_gallery);
-//        gridLayoutManager = new GridLayoutManager(getContext(), 2);
-//        recyclerView.setLayoutManager(gridLayoutManager);
 
         models = getData();
         adapter = new SpeciesRecyclerAdapter(getContext(), models);

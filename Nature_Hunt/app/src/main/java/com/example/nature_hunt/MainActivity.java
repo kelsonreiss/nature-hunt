@@ -103,10 +103,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
                 Object item = parent.getItemAtPosition(position);
                 if (item instanceof Hunt){
+
                     Hunt hunt=(Hunt) item;
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("hunt", hunt);
 
                     // TODO: Have HuntPreviewFrag accept selected hunt object
                     HuntPreviewFrag previewFrag = HuntPreviewFrag.newInstance();
+                    previewFrag.setArguments(bundle);
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.add(android.R.id.content, previewFrag)
@@ -270,7 +274,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void PopulateHuntSearchList() {
-
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {

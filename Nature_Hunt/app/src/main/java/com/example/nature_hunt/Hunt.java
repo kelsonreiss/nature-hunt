@@ -2,12 +2,14 @@ package com.example.nature_hunt;
 
 import android.util.Pair;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class to represent a single scavenger hunt
+ * Make it Serializable to pass between fragments
  */
-public class Hunt {
+public class Hunt implements Serializable {
 
     // Id of the hunt
     private Integer m_id;
