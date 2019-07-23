@@ -1,0 +1,61 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "c368f1efd1e0449ca297d7653a1ae774",
+    "entities": [
+      {
+        "tableName": "ActiveHunts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`huntId` INTEGER NOT NULL, PRIMARY KEY(`huntId`))",
+        "fields": [
+          {
+            "fieldPath": "huntId",
+            "columnName": "huntId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "huntId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "HuntProgress",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`huntId` INTEGER NOT NULL, `speciesId` INTEGER NOT NULL, PRIMARY KEY(`huntId`, `speciesId`))",
+        "fields": [
+          {
+            "fieldPath": "huntId",
+            "columnName": "huntId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speciesId",
+            "columnName": "speciesId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "huntId",
+            "speciesId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c368f1efd1e0449ca297d7653a1ae774')"
+    ]
+  }
+}
