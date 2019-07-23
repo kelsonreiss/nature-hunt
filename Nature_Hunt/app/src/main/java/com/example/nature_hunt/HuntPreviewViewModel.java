@@ -1,6 +1,6 @@
 package com.example.nature_hunt;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 public class HuntPreviewViewModel extends ViewModel {
     // TODO: Implement the ViewModel
