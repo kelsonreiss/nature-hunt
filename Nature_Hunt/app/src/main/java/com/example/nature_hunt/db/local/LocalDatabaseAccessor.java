@@ -26,6 +26,9 @@ public abstract class LocalDatabaseAccessor {
     @Query("DELETE FROM HuntProgress WHERE huntId == :huntId")
     public abstract void clearHuntProgress(int huntId);
 
+    @Query("SELECT huntId FROM ActiveHunts")
+    public abstract List<Integer> getActiveHunts();
+
     @Query("SELECT speciesId FROM HuntProgress WHERE huntId == :huntId")
     public abstract List<Integer> getSpeciesFoundFromHunt(int huntId);
 }
