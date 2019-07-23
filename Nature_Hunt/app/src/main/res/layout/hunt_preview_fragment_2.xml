@@ -19,22 +19,37 @@
     <!--<android.support.v4.widget.NestedScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent">-->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/dismiss_preview_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:backgroundTint="@null"
+                android:tint="@android:color/white"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                app:fabSize="normal"
+                app:srcCompat="?attr/actionModeCloseDrawable" />
+
             <ImageView
                 android:id="@+id/hunt_preview_image"
-                android:layout_margin="@dimen/preview_margin"
                 android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
                 android:layout_height="200sp"
                 android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/stock_trail"/>
 
             <TextView
                 android:id="@+id/hunt_title"
+                android:layout_below="@id/hunt_preview_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -48,6 +63,7 @@
 
             <TextView
                 android:id="@+id/hunt_description_title"
+                android:layout_below="@id/hunt_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/preview_margin"
@@ -57,6 +73,7 @@
             <TextView
                 android:id="@+id/hunt_description"
                 android:layout_width="match_parent"
+                android:layout_below="@id/hunt_description_title"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/preview_margin"
                 android:text="Test" />
@@ -65,31 +82,30 @@
                 android:id="@+id/species_overview_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/hunt_description"
                 android:layout_margin="@dimen/preview_margin"
                 android:text="@string/hunt_preview_species_title"
                 android:textSize="@dimen/hunt_preview_description_title_size"/>
 
-            <GridView
-                android:id="@+id/hunt_preview_image_grid"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/species_image_gallery"
+                android:layout_below="@id/species_overview_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:minHeight="90dp"
-                android:numColumns="2"
-                android:stretchMode="columnWidth" >
-
-            </GridView>
+                android:padding="10dp">
+            </androidx.recyclerview.widget.RecyclerView>
 
             <Button
                 android:id="@+id/hunt_start_btn"
                 android:layout_width="wrap_content"
+                android:layout_below="@id/species_image_gallery"
+                android:layout_centerInParent="true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="#FFFFFF"
                 android:text="@string/hunt_preview_start_hunt" />
 
-        </LinearLayout>
+        </RelativeLayout>
     <!--</android.support.v4.widget.NestedScrollView>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

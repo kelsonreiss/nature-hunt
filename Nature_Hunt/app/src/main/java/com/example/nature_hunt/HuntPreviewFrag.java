@@ -1,12 +1,17 @@
 package com.example.nature_hunt;
 
-import androidx.lifecycle.ViewModelProviders;
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +19,19 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+
 public class HuntPreviewFrag extends DialogFragment {
 
     private HuntPreviewViewModel mViewModel;
+    private SpeciesRecyclerAdapter adapter;
+    private ArrayList<SpeciesRecyclerItemModel> models;
     GridView gridView;
+    private ImageView imageView;
+    RecyclerView recyclerView;
+    GridLayoutManager gridLayoutManager;
 
     Integer[] imageIDs = {
             R.mipmap.stock_trail,
@@ -41,8 +55,30 @@ public class HuntPreviewFrag extends DialogFragment {
                              @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view =  inflater.inflate(R.layout.hunt_preview_fragment_2, container, false);
-        gridView = (GridView) view.findViewById(R.id.hunt_preview_image_grid);
-        gridView.setAdapter(new ImageAdapterGridView(getActivity()));
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.dismiss_preview_button);
+
+        // Made dismiss button transparent
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+        //imageView = (ImageView) view.findViewById(R.id.species_preview_image);
+        recyclerView = (RecyclerView) view.findViewById(R.id.species_image_gallery);
+//        gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        recyclerView.setLayoutManager(gridLayoutManager);
+
+        models = getData();
+        adapter = new SpeciesRecyclerAdapter(getContext(), models);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+
+
+//        gridView = (GridView) view.findViewById(R.id.hunt_preview_image_grid);
+//        gridView.setAdapter(new ImageAdapterGridView(getActivity()));
 //        Toolbar toolbar = view.findViewById(R.id.hunt_preview_toolbar);
 //        toolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -53,6 +89,18 @@ public class HuntPreviewFrag extends DialogFragment {
 //        });
 
         return view;
+    }
+
+    private ArrayList getData(){
+
+        ArrayList speciesList = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
+            model.setImage_drawable(R.drawable.flower);
+            model.setName("Flower");
+            speciesList.add(model);
+        }
+        return speciesList;
     }
 
     @Override
@@ -102,5 +150,4 @@ public class HuntPreviewFrag extends DialogFragment {
             return mImageView;
         }
     }
-
 }
