@@ -69,17 +69,12 @@
                 android:text="@string/hunt_preview_species_title"
                 android:textSize="@dimen/hunt_preview_description_title_size"/>
 
-            <GridView
-                android:id="@+id/hunt_preview_image_grid"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/species_image_gallery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:minHeight="90dp"
-                android:numColumns="2"
-                android:stretchMode="columnWidth" >
-
-            </GridView>
+                android:padding="10dp">
+            </android.support.v7.widget.RecyclerView>
 
             <Button
                 android:id="@+id/hunt_start_btn"

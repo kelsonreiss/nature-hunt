@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +17,15 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class HuntPreviewFrag extends DialogFragment {
 
     private HuntPreviewViewModel mViewModel;
     GridView gridView;
+    private ImageView imageView;
+    RecyclerView recyclerView;
+    GridLayoutManager gridLayoutManager;
 
     Integer[] imageIDs = {
             R.mipmap.stock_trail,
@@ -42,8 +49,18 @@ public class HuntPreviewFrag extends DialogFragment {
                              @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view =  inflater.inflate(R.layout.hunt_preview_fragment_2, container, false);
-        gridView = (GridView) view.findViewById(R.id.hunt_preview_image_grid);
-        gridView.setAdapter(new ImageAdapterGridView(getActivity()));
+        imageView = (ImageView) view.findViewById(R.id.species_preview_image);
+        recyclerView = (RecyclerView) view.findViewById(R.id.species_image_gallery);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        ArrayList imageUrls = getData();
+        DataAdapter dataAdapter = new DataAdapter(getContext(), imageUrls);
+        recyclerView.setAdapter(dataAdapter);
+
+
+//        gridView = (GridView) view.findViewById(R.id.hunt_preview_image_grid);
+//        gridView.setAdapter(new ImageAdapterGridView(getActivity()));
 //        Toolbar toolbar = view.findViewById(R.id.hunt_preview_toolbar);
 //        toolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -54,6 +71,21 @@ public class HuntPreviewFrag extends DialogFragment {
 //        });
 
         return view;
+    }
+
+    private ArrayList getData(){
+        String urlString[] = {
+                "url1",
+                "url2",
+                "url3"
+        };
+        ArrayList imageUrlList = new ArrayList<>();
+        for (int i = 0; i < urlString.length; i++){
+            ImageUrl imageUrl = new ImageUrl();
+            imageUrl.setImageUrl(urlString[i]);
+            imageUrlList.add(imageUrl);
+        }
+        return imageUrlList;
     }
 
     @Override
@@ -103,5 +135,4 @@ public class HuntPreviewFrag extends DialogFragment {
             return mImageView;
         }
     }
-
 }
