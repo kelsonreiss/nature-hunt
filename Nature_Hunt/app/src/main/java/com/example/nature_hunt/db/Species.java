@@ -2,8 +2,11 @@ package com.example.nature_hunt.db;
 
 public class Species {
 
-    @com.google.gson.annotations.SerializedName("Id")
+    @com.google.gson.annotations.SerializedName("id")
     private int m_id;
+
+    @com.google.gson.annotations.SerializedName("SpeciesId")
+    private int m_speciesId;
 
     @com.google.gson.annotations.SerializedName("Name")
     private String m_scientificName;
@@ -31,7 +34,7 @@ public class Species {
 
 
     public int getId() {
-        return m_id;
+        return m_speciesId;
     }
 
     public String getScientificName() {

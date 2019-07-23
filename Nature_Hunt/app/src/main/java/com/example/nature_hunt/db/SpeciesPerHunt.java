@@ -2,6 +2,9 @@ package com.example.nature_hunt.db;
 
 public class SpeciesPerHunt {
 
+    @com.google.gson.annotations.SerializedName("id")
+    private int m_id;
+
     @com.google.gson.annotations.SerializedName("HuntId")
     private int m_huntId;
 

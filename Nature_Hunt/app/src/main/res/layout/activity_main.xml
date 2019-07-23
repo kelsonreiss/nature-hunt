@@ -13,8 +13,24 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize">
 
-
     </FrameLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/HuntsSearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:imeOptions="actionSearch"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        app:layout_constraintBottom_toBottomOf="@+id/FramedFragmentHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/FramedFragmentHolder"
+        app:layout_constraintVertical_bias="0.082">
+
+        <requestFocus />
+    </AutoCompleteTextView>
 
     <Button
         android:id="@+id/preview_button"
