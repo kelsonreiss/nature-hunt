@@ -7,15 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/message"
+    <FrameLayout
+        android:id="@+id/FramedFragmentHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize">
+
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/preview_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/title_home"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="launch Hunt Preview"
+        app:layout_constraintBottom_toBottomOf="@+id/FramedFragmentHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/FramedFragmentHolder" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/launch_cam_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="20dp"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
 
 </android.support.constraint.ConstraintLayout>

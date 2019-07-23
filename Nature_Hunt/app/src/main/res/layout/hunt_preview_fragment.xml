@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HuntPreviewFrag">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/hunt_preview_image"
+                android:layout_margin="@dimen/preview_margin"
+                android:layout_width="match_parent"
+                android:layout_height="200sp"
+                android:layout_gravity="center_horizontal"
+                tools:src="@tools:sample/backgrounds/scenic[16]" />
+
+            <TextView
+                android:id="@+id/hunt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/previewHuntName"
+                android:gravity="center"
+                android:textSize="@dimen/hunt_preview_title_size"/>
+
+            <android.support.v4.widget.Space
+                android:layout_height="1dp"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:id="@+id/hunt_description_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/preview_margin"
+                android:text="@string/hunt_preview_description_title"
+                android:textSize="@dimen/hunt_preview_description_title_size"/>
+
+            <TextView
+                android:id="@+id/hunt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/preview_margin"
+                android:text="Test" />
+
+            <TextView
+                android:id="@+id/species_overview_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/preview_margin"
+                android:text="@string/hunt_preview_species_title"
+                android:textSize="@dimen/hunt_preview_description_title_size"/>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

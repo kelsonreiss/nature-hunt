@@ -9,7 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
+
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static androidx.core.content.FileProvider.getUriForFile;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 String a = getApplicationContext().getPackageName();
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        getApplicationContext().getPackageName() + ".provider",
+                Uri photoURI = getUriForFile(getBaseContext(),
+                        "com.microsoft.naturehunt.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
