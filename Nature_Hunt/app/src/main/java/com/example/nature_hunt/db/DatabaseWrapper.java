@@ -2,7 +2,6 @@ package com.example.nature_hunt.db;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.example.nature_hunt.Species;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
