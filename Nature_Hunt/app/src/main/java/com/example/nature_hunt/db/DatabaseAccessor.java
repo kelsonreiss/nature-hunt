@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 public class DatabaseAccessor {
     private static final String DATABASE_URL = "https://naturehuntwebapp.azurewebsites.net";
 
-    private MobileServiceClient m_client;
+    protected MobileServiceClient m_client;
 
     public DatabaseAccessor(Context context) {
         try {
