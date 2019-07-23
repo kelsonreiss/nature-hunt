@@ -1,6 +1,7 @@
 package com.example.nature_hunt;
 
 import android.util.Pair;
+import android.util.Property;
 
 import java.util.ArrayList;
 
@@ -10,58 +11,78 @@ import java.util.ArrayList;
 public class Hunt {
 
     // Id of the hunt
-    public Integer id;
+    private Integer m_id;
+    public Integer id() {
+        return m_id;
+    }
 
     // Name of Hunt
     // i.e. "Green Loop Trail"
-    public String name;
+    private String m_name;
+    public String name() {
+        return m_name;
+    }
 
     // Easy to read location info
     // i.e. "Redwoods National Park, CA"
-    public String friendly_location;
+    private String m_friendlyLocation;
+    public String friendlyLocation() {
+        return m_friendlyLocation;
+    }
 
     // Pair representing latitude and longitude coordinates
     // Negative value represents South / West
     // i.e. <40.682932, -124.039570>
-    public Pair<Double, Double> coords;
+    private Pair<Double, Double> m_coords;
+    public Pair<Double, Double> coords() {
+        return m_coords;
+    }
 
     // Optional
     // URL link to header image in blob
-    public String header_image_url;
+    private String m_header_image_url;
+    public String header_image_url() {
+        return m_header_image_url;
+    }
 
     // Arraylist of Species objects that must be found
-    public ArrayList<Species> species_list;
+    private ArrayList<Species> m_speciesList;
+    public ArrayList<Species> speciesList() {
+        return m_speciesList;
+    }
 
     // Optional
     // Description / Overview of hunt
-    public String description;
+    private String m_description;
+    public String description() {
+        return m_description;
+    }
 
     public Hunt(Integer id, String name, String friendly_location, ArrayList<Species> species_list){
-        this.id = id;
-        this.name=name;
-        this.friendly_location = friendly_location;
-        this.species_list = species_list;
+        this.m_id = id;
+        this.m_name=name;
+        this.m_friendlyLocation = friendly_location;
+        this.m_speciesList = species_list;
     }
 
     public Hunt(Integer id, String name, String friendly_location, Pair<Double, Double> coords, ArrayList<Species> species_list){
         this(id, name, friendly_location, species_list);
-        this.coords = coords;
+        this.m_coords = coords;
     }
 
     public Hunt(Integer id, String name, String friendly_location, Pair<Double, Double> coords, ArrayList<Species> species_list, String header_image_url){
         this(id, name, friendly_location, coords, species_list);
-        this.header_image_url = header_image_url;
+        this.m_header_image_url = header_image_url;
     }
 
     public Hunt(Integer id, String name, String friendly_location, Pair<Double, Double> coords, ArrayList<Species> species_list, String description, String header_image_url){
-        this(id, name, friendly_location, coords, species_list);
-        this.header_image_url = header_image_url;
-        this.description = description;
+        this(id, name, friendly_location, coords, species_list, header_image_url);
+        this.m_description = description;
     }
 
     @Override
     public String toString() {
-        return name + " - " + friendly_location;
+        return m_name + " - " + m_friendlyLocation;
     }
 
 }
