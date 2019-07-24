@@ -10,6 +10,33 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <LinearLayout
+            android:id="@+id/api_call_progress_dialog"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:background="@drawable/progress_dialog_background">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="Please wait..."
+                android:gravity="center"/>
+            <ProgressBar
+                android:id="@+id/api_call_progress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"/>
+
+        </LinearLayout>
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class HuntProgressTracker extends DialogFragment {
     private ArrayList<SpeciesRecyclerItemModel> models;
     private MoreInfoDialogFrag moreInfoDialogFrag;
     RecyclerView recyclerView;
+    LinearLayout progress_dialog;
 
     private FloatingActionButton camButton;
 
@@ -151,6 +153,8 @@ public class HuntProgressTracker extends DialogFragment {
         adapter = new VerticalSpeciesRecyclerAdapter(getContext(), models);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        progress_dialog = (LinearLayout) view.findViewById(R.id.api_call_progress_dialog);
 
         camButton = view.findViewById(R.id.launch_cam_button);
 
@@ -308,6 +312,14 @@ public class HuntProgressTracker extends DialogFragment {
         Context context;
 
         protected String doInBackground(HuntProgressTracker.PostParams... params) {
+            getActivity().runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    progress_dialog.setVisibility(View.VISIBLE);
+                    progress_dialog.bringToFront();
+                }
+            });
+
             context = params[0].context;
             String filePath = params[0].filePath;
             String result = null;
@@ -320,6 +332,7 @@ public class HuntProgressTracker extends DialogFragment {
 
             return result;
         }
+
 
         // this is called whenever you call puhlishProgress(Integer), for example when updating a progressbar when downloading stuff
         protected void onProgressUpdate(Integer... progress) {
@@ -341,6 +354,10 @@ public class HuntProgressTracker extends DialogFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            // Hide waiting dialog
+            progress_dialog.setVisibility(View.INVISIBLE);
+
 //          (TODO: Change to markChecked(species_common)
             markChecked(stock_flower_names[0]);
             Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
