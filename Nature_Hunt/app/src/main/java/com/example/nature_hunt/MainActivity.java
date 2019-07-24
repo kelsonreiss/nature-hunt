@@ -6,12 +6,19 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+
+import com.example.nature_hunt.db.local.LocalDatabase;
+import com.example.nature_hunt.db.local.LocalDatabaseAccessor;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -34,13 +41,16 @@ public class MainActivity extends AppCompatActivity {
     private static Context context;
 
     private static List<Hunt> searchList;
+    private static Map<Integer, Species> speciesMap;
+
+    private static LocalDatabase db;
+    private static LocalDatabaseAccessor dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         context = getApplicationContext();
-
+//        PopulateSpeciesMap();
         setContentView(R.layout.activity_main);
         mTextMessage = findViewById(R.id.message);
 
@@ -116,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                         dataRepository.LoadData();
                     }
                     final Map<Integer, Hunt> huntsMap = CloudDataRepository.huntsMap;
+                    App.setSpeciesMap(CloudDataRepository.speciesMap);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -133,6 +144,24 @@ public class MainActivity extends AppCompatActivity {
         };
         runAsyncTask(task);
     }
+
+    private void PopulateSpeciesMap() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                try {
+                    CloudDataRepository dataRepository = new CloudDataRepository(context);
+                    dataRepository.LoadData();
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        runAsyncTask(task);
+    }
+
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
