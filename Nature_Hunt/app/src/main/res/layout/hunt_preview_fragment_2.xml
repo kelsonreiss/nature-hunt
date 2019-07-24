@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:maxLines="2"
                 android:text="Redmond, WA"
                 android:textSize="@dimen/hunt_preview_description_title_size"/>
 

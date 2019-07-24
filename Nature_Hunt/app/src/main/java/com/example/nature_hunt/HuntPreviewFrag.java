@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -63,6 +64,8 @@ public class HuntPreviewFrag extends DialogFragment {
         } catch (Exception e){
             e.printStackTrace();
         }
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         if (mHunt != null){
             // Set title data
@@ -72,11 +75,11 @@ public class HuntPreviewFrag extends DialogFragment {
             // Set Hunt location
             TextView location = (TextView) view.findViewById(R.id.hunt_location);
             // If a location wasn't set, don't show anything
-            if (mHunt.friendlyLocation() != null){
+            if (mHunt.friendlyLocation() == null){
                 Log.i("Location", mHunt.friendlyLocation());
                 location.setVisibility(View.GONE);
             } else{
-                title.setText(mHunt.friendlyLocation());
+                location.setText(mHunt.friendlyLocation());
             }
 
             // Set hunt description
@@ -123,26 +126,37 @@ public class HuntPreviewFrag extends DialogFragment {
     }
 
     private ArrayList getData(){
-        if (mHunt == null || mHunt.speciesList() == null || mHunt.speciesList().isEmpty()){
-            ArrayList speciesList = new ArrayList<>();
 
-            for (int i = 0; i < stock_flower_ids.length; i++){
-                SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
-                model.setImage_drawable(stock_flower_ids[i]);
-                model.setName(stock_flower_names[i]);
-                speciesList.add(model);
-            }
-            return speciesList;
-        }
 
-        ArrayList<SpeciesRecyclerItemModel> speciesList = new ArrayList<SpeciesRecyclerItemModel>();
-        for (Species species : mHunt.speciesList()) {
-            SpeciesRecyclerItemModel speciesItem = new SpeciesRecyclerItemModel();
-            speciesItem.setName(species.commonName());
-            speciesItem.setImage_drawable(R.drawable.flower);
-            speciesList.add(speciesItem);
+        ArrayList speciesList = new ArrayList<>();
+
+        for (int i = 0; i < stock_flower_ids.length; i++){
+            SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
+            model.setImage_drawable(stock_flower_ids[i]);
+            model.setName(stock_flower_names[i]);
+            speciesList.add(model);
         }
         return speciesList;
+//        if (mHunt == null || mHunt.speciesList() == null || mHunt.speciesList().isEmpty()){
+//            ArrayList speciesList = new ArrayList<>();
+//
+//            for (int i = 0; i < stock_flower_ids.length; i++){
+//                SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
+//                model.setImage_drawable(stock_flower_ids[i]);
+//                model.setName(stock_flower_names[i]);
+//                speciesList.add(model);
+//            }
+//            return speciesList;
+//        }
+//
+//        ArrayList<SpeciesRecyclerItemModel> speciesList = new ArrayList<SpeciesRecyclerItemModel>();
+//        for (Species species : mHunt.speciesList()) {
+//            SpeciesRecyclerItemModel speciesItem = new SpeciesRecyclerItemModel();
+//            speciesItem.setName(species.commonName());
+//            speciesItem.setImage_drawable(R.drawable.flower);
+//            speciesList.add(speciesItem);
+//        }
+//        return speciesList;
     }
 //
 //    @Override
