@@ -6,8 +6,8 @@
         </shape>
     </item>
     <item android:drawable="@drawable/ic_round_check_circle_24px"
-        android:bottom="60dp"
-        android:left="60dp"
-        android:right="60dp"
-        android:top="60dp"/>
+        android:bottom="55dp"
+        android:left="70dp"
+        android:right="70dp"
+        android:top="55dp"/>
 </layer-list>
