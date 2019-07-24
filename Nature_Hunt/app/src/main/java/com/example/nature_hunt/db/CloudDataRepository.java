@@ -19,6 +19,7 @@ public class CloudDataRepository {
     public static Map<Integer, com.example.nature_hunt.Hunt> huntsMap;
     public static Map<Integer, ArrayList<Species>> huntSpeciesMap;
     public static Map<Integer, Species> speciesMap;
+    public static boolean isLoaded = false;
 
     public CloudDataRepository(Context context)
     {
@@ -29,6 +30,7 @@ public class CloudDataRepository {
         LoadSpeciesMap();
         LoadHuntSpeciesMap();
         LoadHuntsMap();
+        isLoaded = true;
     }
 
     private void LoadHuntsMap() throws MobileServiceException, ExecutionException, InterruptedException {
@@ -45,6 +47,7 @@ public class CloudDataRepository {
                     huntId,
                     huntDB.getName(),
                     huntDB.getLocation(),
+                    huntDB.get_coordinates(),
                     huntSpeciesMap.get(huntId)
             );
             huntsMap.put(huntId, huntBO);

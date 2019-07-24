@@ -17,6 +17,9 @@ public class Hunt {
     @com.google.gson.annotations.SerializedName("Description")
     private String m_description;
 
+    @com.google.gson.annotations.SerializedName("Coordinates")
+    private String m_coordinates;
+
 
     public int getId() { return m_huntId; }
 
@@ -31,4 +34,6 @@ public class Hunt {
     public String getDescription() {
         return m_description;
     }
+
+    public String get_coordinates() { return m_coordinates; }
 }

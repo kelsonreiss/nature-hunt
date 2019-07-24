@@ -2,6 +2,7 @@ package com.example.nature_hunt;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.example.nature_hunt.db.CloudDataRepository;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         mTextMessage = findViewById(R.id.message);
-
 
         searchList = new ArrayList<>();
         LoadCloudDataRepository();
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    // TODO: Have HuntPreviewFrag accept selected hunt object
                     HuntPreviewFrag previewFrag = HuntPreviewFrag.newInstance();
                     previewFrag.setArguments(bundle);
                     FragmentManager fm = getSupportFragmentManager();
@@ -110,8 +110,11 @@ public class MainActivity extends AppCompatActivity {
             protected Void doInBackground(Void... params) {
 
                 try {
-                    CloudDataRepository dataRepository = new CloudDataRepository(context);
-                    dataRepository.LoadData();
+                    if (!CloudDataRepository.isLoaded)
+                    {
+                        CloudDataRepository dataRepository = new CloudDataRepository(getApplicationContext());
+                        dataRepository.LoadData();
+                    }
                     final Map<Integer, Hunt> huntsMap = CloudDataRepository.huntsMap;
 
                     runOnUiThread(new Runnable() {
@@ -137,5 +140,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return task.execute();
         }
+    }
+
+    public void addMapFragment(View view) {
+        Intent mapActivity=new Intent(context, MapsActivity.class);
+        startActivity(mapActivity);
     }
 }

@@ -19,11 +19,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <requestFocus />
     </AutoCompleteTextView>
+
+    <Button
+        android:id="@+id/mapview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right|bottom"
+        android:background="@android:color/transparent"
+        android:drawableStart="@android:drawable/ic_menu_mapmode"
+        android:onClick="addMapFragment"
+        app:layout_constraintEnd_toEndOf="@+id/HuntsSearchBar"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/homepage_header_hunts_in_progress"
