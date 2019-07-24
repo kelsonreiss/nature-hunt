@@ -102,6 +102,7 @@ public class HuntPreviewFrag extends DialogFragment {
                         .beginTransaction()
                         .replace(android.R.id.content, tracker)
                         .commit();
+                App.getDB().startHunt(mHunt.id());
             }
         });
 
