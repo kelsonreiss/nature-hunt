@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:addroid="http://schemas.android.com/tools"
     android:layout_margin="16dp"
     android:orientation="vertical">
 
@@ -26,9 +27,10 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_height="16dp"
         android:textStyle="bold"
-        android:textSize="13dp"/>
+        android:textSize="14dp"
+        android:text="Progress"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -37,12 +39,13 @@
         android:layout_height="40dp"
         android:max="6" />
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="480dp"
+        android:stateListAnimator="@null"
         app:rowCount="3"
         app:columnCount="2">
+
 
         <LinearLayout
             android:layout_width="150dp"
@@ -174,8 +177,21 @@
                 android:maxLines="1"
                 android:textColor="#000"
                 android:textSize="18sp" />
+
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:background="#acacac"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text= "Congratulations \n \n You have completed the hunt. \n \n \n \n Cool"
+            android:textSize="25dp"
+            addroid:visibility="gone"/>
 
     </androidx.cardview.widget.CardView>
 
