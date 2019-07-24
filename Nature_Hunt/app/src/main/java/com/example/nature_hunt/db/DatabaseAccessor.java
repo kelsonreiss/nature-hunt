@@ -26,10 +26,10 @@ public class DatabaseAccessor {
     }
 
     protected MobileServiceTable<Species> getSpeciesTable() {
-        return m_client.getTable(Species.class);
+        return m_client.getTable("Species_SUBSET", Species.class);
     }
 
     protected MobileServiceTable<SpeciesPerHunt> getSpeciesPerHuntTable() {
-        return m_client.getTable("HuntSpeciesMap", SpeciesPerHunt.class);
+        return m_client.getTable("HuntSpeciesMap_SUBSET", SpeciesPerHunt.class);
     }
 }
