@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.add(android.R.id.content, previewFrag)
-                        .addToBackStack(null).commit();
+                        .addToBackStack(getResources().getString(R.string.home_activity_tag)).commit();
             }
         });
 

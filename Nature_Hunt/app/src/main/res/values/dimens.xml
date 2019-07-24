@@ -5,4 +5,6 @@
     <dimen name="hunt_preview_title_size">25dp</dimen>
     <dimen name="hunt_preview_description_title_size">20dp</dimen>
     <dimen name="preview_margin">5dp</dimen>
+    <dimen name="more_info_frag_height">200dp</dimen>
+    <dimen name="more_info_frag_width">300dp</dimen>
 </resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/cardview_light_background">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/progress_action_bar">
+
+            <ImageButton
+                android:id="@+id/back_arrow_prog_frag"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:src="?attr/homeAsUpIndicator"
+                android:tint="@android:color/black" />
+
+            <TextView
+                android:id="@+id/hunt_title_prog_frag"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:text="@string/previewHuntName"
+                android:maxLines="1"
+                android:textSize="@dimen/hunt_preview_title_size"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/more_info_prog_frag_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"
+                android:src="@android:drawable/ic_dialog_info"
+                android:tint="@android:color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/progress_text"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_below="@id/progress_action_bar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1"
+                android:text="Hunt Progress"
+                android:textSize="@dimen/hunt_preview_title_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:gravity="right"
+                android:textSize="@dimen/hunt_preview_title_size"
+                android:layout_weight="1"
+                android:text="0/"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_text"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vertical_species_image_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressBar"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:padding="5dp"></androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
