@@ -28,6 +28,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nature_hunt.db.local.HuntProgress;
+import com.example.nature_hunt.db.local.LocalDatabaseAccessor;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -44,6 +46,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -53,6 +57,7 @@ public class HuntProgressTracker extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String HUNT_ARG = "hunt";
+    private static final String SPECIES_FOUND_ARG = "speciesFound";
     private VerticalSpeciesRecyclerAdapter adapter;
     private ArrayList<SpeciesRecyclerItemModel> models;
     private MoreInfoDialogFrag moreInfoDialogFrag;
@@ -82,6 +87,11 @@ public class HuntProgressTracker extends DialogFragment {
 
 
     private Hunt mHunt;
+    private List<Species> speciesList;
+    private List<Integer> currentSpeciesFound;
+    private HashMap<Integer, Species> speciesMap;
+    private HashMap<String, Integer> commonNameToSpeciesID;
+    private LocalDatabaseAccessor dbAccessor;
 
     private HuntProgressTracker() {
         // Required empty public constructor
@@ -108,7 +118,15 @@ public class HuntProgressTracker extends DialogFragment {
         if (getArguments() != null) {
             mHunt = (Hunt) getArguments().getSerializable(HUNT_ARG);
         }
-
+        List<Species> speciesList = mHunt.speciesList();
+        speciesMap = new HashMap();
+        for(Species species : speciesList){
+            speciesMap.put(species.id(), species);
+        }
+        HuntProgressTracker fragment = new HuntProgressTracker();
+//        LocalDatabaseAccessor accessor = App.getDB();
+        dbAccessor = App.getDB();
+        currentSpeciesFound = dbAccessor.getSpeciesFoundFromHunt(mHunt.id());
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogStyle);
     }
 
@@ -161,10 +179,43 @@ public class HuntProgressTracker extends DialogFragment {
         camButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                markFound(4, 5);
                 dispatchTakePictureIntent();
             }
         });
         return view;
+    }
+
+    public void markFound(Integer huntID, Integer speciesID){
+        Species species = getSpeciesFromID(4);
+        List found = dbAccessor.getSpeciesFoundFromHunt(4);
+        dbAccessor.markSpeciesAsFound(huntID, speciesID);
+        found = dbAccessor.getSpeciesFoundFromHunt(4);
+    }
+
+    private boolean validateResult(String commonName){
+        if(!commonName.isEmpty()){
+            for(Species species : this.mHunt.speciesList()){
+                if(species.commonName().toLowerCase() == commonName){
+                    App.getDB().markSpeciesAsFound(this.mHunt.id(), species.id());
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Species getSpeciesFromID(int id){
+        return App.getSpeciesMap().get(id);
+    }
+
+    private boolean existsSpeciesInHunt(String commonName){
+        for(Species species : this.speciesList){
+            if(species.commonName() == commonName){
+                return true;
+            }
+        }
+        return false;
     }
 
     private ArrayList getData(){
@@ -359,7 +410,13 @@ public class HuntProgressTracker extends DialogFragment {
             progress_dialog.setVisibility(View.INVISIBLE);
 
 //          (TODO: Change to markChecked(species_common)
-            markChecked(stock_flower_names[0]);
+            // Validate returns a boolean to indicate success
+//            boolean validResult = validate(species_common);
+            boolean validResult = validateResult(species_common);
+            System.out.println("validateResult: " + validResult);
+            if(validResult) {
+                markChecked(stock_flower_names[0]);
+            }
             Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
             toast.show();
         }
