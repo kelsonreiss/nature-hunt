@@ -4,6 +4,10 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="previewHuntName">Loop Trail Hunt</string>
+    <string name="homepage_hunts_completed">My Completed Hunts</string>
+    <string name="homepage_hunts_in_progress">My Hunts In Progress</string>
+    <string name="homepage_preview_button">Launch Hunt Preview</string>
+    <string name="homepage_search_hint">Search for a hunt&#8230;</string>
     <string name="hunt_preview_description_title">About the Hunt</string>
     <string name="hunt_preview_species_title">Species To Find</string>
     <string name="hunt_preview_start_hunt">Begin Hunt</string>
