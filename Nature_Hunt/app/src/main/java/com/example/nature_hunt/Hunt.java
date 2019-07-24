@@ -5,6 +5,8 @@ import android.util.Pair;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static java.lang.Double.parseDouble;
+
 /**
  * Class to represent a single scavenger hunt
  * Make it Serializable to pass between fragments
@@ -66,17 +68,18 @@ public class Hunt implements Serializable {
         this.m_speciesList = species_list;
     }
 
-    public Hunt(Integer id, String name, String friendly_location, Pair<Double, Double> coords, ArrayList<Species> species_list){
+    public Hunt(Integer id, String name, String friendly_location, String coords, ArrayList<Species> species_list){
         this(id, name, friendly_location, species_list);
-        this.m_coords = coords;
+        String[] values = coords.split(",");
+        this.m_coords = new Pair<>(parseDouble(values[0]), parseDouble(values[1]));
     }
 
-    public Hunt(Integer id, String name, String friendly_location, Pair<Double, Double> coords, ArrayList<Species> species_list, String header_image_url){
+    public Hunt(Integer id, String name, String friendly_location, String coords, ArrayList<Species> species_list, String header_image_url){
         this(id, name, friendly_location, coords, species_list);
         this.m_header_image_url = header_image_url;
     }
 
-    public Hunt(Integer id, String name, String friendly_location, Pair<Double, Double> coords, ArrayList<Species> species_list, String description, String header_image_url){
+    public Hunt(Integer id, String name, String friendly_location, String coords, ArrayList<Species> species_list, String description, String header_image_url){
         this(id, name, friendly_location, coords, species_list, header_image_url);
         this.m_description = description;
     }
