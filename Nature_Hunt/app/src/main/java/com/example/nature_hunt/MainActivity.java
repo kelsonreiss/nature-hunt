@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        searchList = new ArrayList<>();
-        PopulateHuntSearchList();
+        searchList = App.getHuntsList();
+//        PopulateHuntSearchList();
         ArrayAdapter<Hunt> searchBarAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, searchList);
         AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
         Context context;
 
         protected String doInBackground(PostParams... params) {
-            context = params[0].context;
+            context = getApplicationContext();
             String filePath = params[0].filePath;
             String result = null;
             try {
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
             protected Void doInBackground(Void... params) {
 
                 try {
-                    DatabaseWrapper dbWrapper = new DatabaseWrapper(context);
+                    DatabaseWrapper dbWrapper = new DatabaseWrapper(getApplicationContext());
                     final Map<Integer, Hunt> huntsMap = dbWrapper.getHuntsMap();
 
                     runOnUiThread(new Runnable() {
