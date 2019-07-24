@@ -1,21 +1,13 @@
 package com.example.nature_hunt;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,27 +17,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.example.nature_hunt.db.CloudDataRepository;
 
-import java.io.BufferedReader;
-
-import com.example.nature_hunt.db.DatabaseWrapper;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         searchList = new ArrayList<>();
-        PopulateHuntSearchList();
+        LoadCloudDataRepository();
         ArrayAdapter<Hunt> searchBarAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, searchList);
         AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
@@ -128,14 +104,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void PopulateHuntSearchList() {
+    private void LoadCloudDataRepository() {
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
 
                 try {
-                    DatabaseWrapper dbWrapper = new DatabaseWrapper(context);
-                    final Map<Integer, Hunt> huntsMap = dbWrapper.getHuntsMap();
+                    CloudDataRepository dataRepository = new CloudDataRepository(context);
+                    dataRepository.LoadData();
+                    final Map<Integer, Hunt> huntsMap = CloudDataRepository.huntsMap;
 
                     runOnUiThread(new Runnable() {
                         @Override
