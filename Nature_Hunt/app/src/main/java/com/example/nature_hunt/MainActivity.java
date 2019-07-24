@@ -10,11 +10,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+
 import com.example.nature_hunt.db.DatabaseWrapper;
 
 import java.io.File;
@@ -44,7 +50,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
-    private Button seePreview;
     private FloatingActionButton camButton;
 
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -79,32 +84,21 @@ public class MainActivity extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
-        seePreview = findViewById(R.id.preview_button);
-        seePreview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HuntPreviewFrag previewFrag = HuntPreviewFrag.newInstance();
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.add(android.R.id.content, previewFrag)
-                        .addToBackStack(null).commit();
-            }
-        });
 
         searchList = new ArrayList<>();
         PopulateHuntSearchList();
-        ArrayAdapter<Hunt> adapter = new ArrayAdapter<>(this,
+        ArrayAdapter<Hunt> searchBarAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, searchList);
         AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
-        textView.setAdapter(adapter);
+        textView.setAdapter(searchBarAdapter);
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
                 Object item = parent.getItemAtPosition(position);
-                if (item instanceof Hunt){
+                if (item instanceof Hunt) {
 
-                    Hunt hunt=(Hunt) item;
+                    Hunt hunt = (Hunt) item;
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("hunt", hunt);
 
@@ -118,22 +112,45 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // TODO: Populate both of these RecyclerViews with actual data from our databases
+        RecyclerView huntsInProgressView = findViewById(R.id.homepage_hunts_in_progress_recycler_view);
+        ArrayList<HuntRecyclerItemModel> huntsInProgress = new ArrayList<HuntRecyclerItemModel>();
+        for (int i = 0; i < 5; i++) {
+            HuntRecyclerItemModel item = new HuntRecyclerItemModel();
+            item.setName("Hunt " + i);
+            item.setImage_drawable(R.drawable.stock_trail);
+            huntsInProgress.add(item);
+        }
+        HuntRecyclerAdapter huntsInProgressAdapter = new HuntRecyclerAdapter(this, huntsInProgress);
+        huntsInProgressView.setAdapter(huntsInProgressAdapter);
+        huntsInProgressView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        RecyclerView huntsCompletedView = findViewById(R.id.homepage_hunts_completed_recycler_view);
+        ArrayList<HuntRecyclerItemModel> huntsCompleted = new ArrayList<HuntRecyclerItemModel>();
+        for (int i = 0; i < 5; i++) {
+            HuntRecyclerItemModel item = new HuntRecyclerItemModel();
+            item.setName("Completed Hunt " + i);
+            item.setImage_drawable(R.drawable.stock_trail);
+            huntsCompleted.add(item);
+        }
+        HuntRecyclerAdapter huntsCompletedAdapter = new HuntRecyclerAdapter(this, huntsCompleted);
+        huntsCompletedView.setAdapter(huntsCompletedAdapter);
+        huntsCompletedView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             System.out.println("mCurrentPhotoPath" + mCurrentPhotoPath);
-            try{
+            try {
                 PostParams postParams = new PostParams(this, mCurrentPhotoPath);
                 new UploadFileTask().execute(postParams);
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 Toast toast = Toast.makeText(this, "Error sending post request", Toast.LENGTH_LONG);
                 toast.show();
             }
-        }
-        else{
+        } else {
             Toast toast = Toast.makeText(this, "Picture was not taken", Toast.LENGTH_LONG);
             toast.show();
         }
@@ -153,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         connection.setRequestMethod("POST");
 
         String apiKey = "949e7dc4318041af961810828dadcf05";
-        connection.setRequestProperty("Content-Type","application/octet-stream");
+        connection.setRequestProperty("Content-Type", "application/octet-stream");
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
 
         OutputStream outputStream = connection.getOutputStream();
@@ -167,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 //        System.out.println("Response message connection.getResponseMessage(): " + connection.getResponseMessage());
 
         int status = connection.getResponseCode();
-        switch(status) {
+        switch (status) {
             case (HttpURLConnection.HTTP_OK):
                 System.out.println("Got a response");
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
