@@ -1,9 +1,11 @@
 package com.example.nature_hunt;
 
+import java.io.Serializable;
+
 /**
  * Class representing an individual species
  */
-public class Species {
+public class Species implements Serializable {
 
     // Id of the species
     private int m_id;

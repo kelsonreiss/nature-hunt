@@ -95,6 +95,18 @@
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:padding="5dp"></androidx.recyclerview.widget.RecyclerView>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/launch_cam_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_alignParentRight="true"
+            android:padding="20dp"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
 
     </RelativeLayout>
     <!--</android.support.v4.widget.NestedScrollView>-->
