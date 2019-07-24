@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,11 @@ public class HuntPreviewFrag extends DialogFragment {
     GridLayoutManager gridLayoutManager;
     private Hunt mHunt;
 
-    Integer[] imageIDs = {
-            R.mipmap.stock_trail,
-            R.mipmap.stock_trail,
-            R.mipmap.stock_trail
+    Integer[] stock_flower_ids = {
+            R.drawable.daffodil, R.drawable.flower, R.drawable.hibiscus, R.drawable.maidenhair, R.drawable.maple, R.drawable.white_spruce
     };
+
+    String[] stock_flower_names = {"Daffodil", "Sheep Laurel", "Hibiscus", "Maidenhair", "Maple", "White Spruce"};
 
     public static HuntPreviewFrag newInstance() {
         return new HuntPreviewFrag();
@@ -59,6 +60,7 @@ public class HuntPreviewFrag extends DialogFragment {
         View view =  inflater.inflate(R.layout.hunt_preview_fragment_2, container, false);
         try {
             mHunt = (Hunt) getArguments().getSerializable("hunt");
+            Log.i("Bundle", mHunt.toString());
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -67,8 +69,27 @@ public class HuntPreviewFrag extends DialogFragment {
             // Set title data
             TextView title = (TextView) view.findViewById(R.id.hunt_title);
             title.setText(mHunt.name());
+
+            // Set Hunt location
+            TextView location = (TextView) view.findViewById(R.id.hunt_location);
+            // If a location wasn't set, don't show anything
+            if (mHunt.friendlyLocation() != null){
+                Log.i("Location", mHunt.friendlyLocation());
+                location.setVisibility(View.GONE);
+            } else{
+                title.setText(mHunt.friendlyLocation());
+            }
+
+            // Set hunt description
+            TextView description = (TextView) view.findViewById(R.id.hunt_description);
+            if (mHunt.description() == null){
+                TextView description_title = (TextView) view.findViewById(R.id.hunt_description_title);
+                description_title.setVisibility(View.GONE);
+                description.setVisibility(View.GONE);
+            } else{
+                description.setText(mHunt.description());
+            }
         }
-        
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.dismiss_preview_button);
 
         // Made dismiss button transparent
@@ -85,32 +106,23 @@ public class HuntPreviewFrag extends DialogFragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-
-
-//        gridView = (GridView) view.findViewById(R.id.hunt_preview_image_grid);
-//        gridView.setAdapter(new ImageAdapterGridView(getActivity()));
-//        Toolbar toolbar = view.findViewById(R.id.hunt_preview_toolbar);
-//        toolbar.setNavigationIcon(R.drawable.ic_home_black_24dp);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dismiss();
-//            }
-//        });
-
         return view;
     }
 
     private ArrayList getData(){
 
-        ArrayList speciesList = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
-            SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
-            model.setImage_drawable(R.drawable.flower);
-            model.setName("Flower");
-            speciesList.add(model);
+        if (mHunt == null || mHunt.speciesList() == null){
+            ArrayList speciesList = new ArrayList<>();
+            for (int i = 0; i < stock_flower_ids.length; i++){
+                SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
+                model.setImage_drawable(stock_flower_ids[i]);
+                model.setName(stock_flower_names[i]);
+                speciesList.add(model);
+            }
+            return speciesList;
         }
-        return speciesList;
+
+        return mHunt.speciesList();
     }
 
     @Override
@@ -118,46 +130,5 @@ public class HuntPreviewFrag extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(HuntPreviewViewModel.class);
         // TODO: Use the ViewModel
-    }
-
-    public class ImageAdapterGridView extends BaseAdapter{
-        private Context mContext;
-
-        public ImageAdapterGridView(Context c){
-            mContext = c;
-        }
-
-        @Override
-        public int getCount() {
-            return imageIDs.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView mImageView;
-
-            if (convertView == null) {
-                mImageView = new ImageView(mContext);
-                mImageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-//                mImageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                mImageView.setPadding(16, 16, 16, 16);
-            } else {
-                mImageView = (ImageView) convertView;
-            }
-            mImageView.setImageResource(imageIDs[position]);
-            return mImageView;
-        }
     }
 }

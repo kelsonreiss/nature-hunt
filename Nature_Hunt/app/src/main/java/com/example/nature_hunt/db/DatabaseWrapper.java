@@ -29,8 +29,7 @@ public class DatabaseWrapper  extends DatabaseAccessor{
         MobileServiceList<Hunt> huntsDB = huntTable.execute().get();
 
         // Get the HuntSpeciesMap to get species list corresponding to each hunt
-        // TODO: Uncomment when get() for the other tables works
-        // Map<Integer, ArrayList<Species>> huntSpeciesMap = getHuntSpeciesMap();
+        Map<Integer, ArrayList<Species>> huntSpeciesMap = getHuntSpeciesMap();
 
         // Loop through all the DB records to populate the Hunts map
         Map<Integer, com.example.nature_hunt.Hunt> huntsMap = new HashMap<>();
@@ -40,8 +39,7 @@ public class DatabaseWrapper  extends DatabaseAccessor{
                     huntId,
                     huntDB.getName(),
                     huntDB.getLocation(),
-                    new ArrayList<Species>()
-                    //huntSpeciesMap.get(huntId)
+                    huntSpeciesMap.get(huntId)
             );
             huntsMap.put(huntId, huntBO);
         }

@@ -43,7 +43,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Glide.with(context)
-                .load(R.mipmap.stock_trail)
+                .load(R.drawable.stock_trail)
                 .into(viewHolder.img);
     }
 
