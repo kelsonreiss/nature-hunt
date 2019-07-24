@@ -45,10 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         searchList = new ArrayList<>();
         LoadCloudDataRepository();
-        ArrayAdapter<Hunt> searchBarAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, searchList);
         AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
-        textView.setAdapter(searchBarAdapter);
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -117,9 +114,14 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            for (Hunt hunt : huntsMap.values()) {
-                                searchList.add(hunt);
-                            }
+                            searchList.clear();
+                            searchList.addAll(huntsMap.values());
+                            // Providing a new adapter will properly refresh the AutoComplete list
+                            ArrayAdapter<Hunt> searchBarAdapter = new ArrayAdapter<Hunt>(
+                                    MainActivity.this,
+                                    android.R.layout.simple_dropdown_item_1line, searchList);
+                            AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
+                            textView.setAdapter(searchBarAdapter);
                         }
                     });
                 } catch (final Exception e) {
