@@ -41,6 +41,10 @@ public class HuntRecyclerAdapter extends RecyclerView.Adapter<HuntRecyclerAdapte
         return huntList.size();
     }
 
+    public HuntRecyclerItemModel getItem(int position) {
+        return huntList.get(position);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         ImageView imageView;
