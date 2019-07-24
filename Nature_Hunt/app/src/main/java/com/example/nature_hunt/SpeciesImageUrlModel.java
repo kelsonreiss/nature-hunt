@@ -1,7 +1,6 @@
 package com.example.nature_hunt;
 
-public class ImageUrl {
-
+public class SpeciesImageUrlModel {
     String imageUrl;
 
     public String getImageUrl(){

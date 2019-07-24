@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -19,10 +18,10 @@ import java.util.ArrayList;
  * https://javapapers.com/android/android-image-gallery-example-app-using-glide-library/
  */
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
-    private ArrayList<ImageUrl> imageUrls;
+    private ArrayList<SpeciesImageUrlModel> imageUrls;
     private Context context;
 
-    public DataAdapter(Context context, ArrayList<ImageUrl> imageUrls){
+    public DataAdapter(Context context, ArrayList<SpeciesImageUrlModel> imageUrls){
         this.context = context;
         this.imageUrls = imageUrls;
     }

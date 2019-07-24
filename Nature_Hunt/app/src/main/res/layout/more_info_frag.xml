@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/more_info_frag_width"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:clipToPadding="true"
+    android:clipChildren="true"
+    >
+
+    <TextView
+        android:id="@+id/hunt_title_more_info"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="@dimen/hunt_preview_title_size"
+        />
+    <TextView
+        android:id="@+id/hunt_location_more_info_frag"
+        android:layout_width="match_parent"
+        android:layout_below="@id/hunt_title_more_info"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/description_title_more_info_frag"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_below="@id/hunt_location_more_info_frag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hunt_preview_description_title"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/hunt_description_more_info_frag"
+        android:layout_width="match_parent"
+        android:layout_below="@id/description_title_more_info_frag"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@id/hunt_description_more_info_frag"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_height="wrap_content"
+        android:text="@string/trail_safety_reminder"/>
+
+    <Button
+        android:id="@+id/dismiss_more_info_frag"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Dismiss"
+        android:background="@drawable/button_rounded"/>
+
+</LinearLayout>

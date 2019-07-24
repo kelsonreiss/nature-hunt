@@ -66,16 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/homepage_header_hunts_completed"
         app:layout_constraintVertical_weight="1"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/launch_cam_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="20dp"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
