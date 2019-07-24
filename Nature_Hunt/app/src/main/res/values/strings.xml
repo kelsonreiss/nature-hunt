@@ -6,5 +6,6 @@
     <string name="previewHuntName">Loop Trail Hunt</string>
     <string name="hunt_preview_description_title">About the Hunt</string>
     <string name="hunt_preview_species_title">Species To Find</string>
-    <string name="hunt_preview_start_hunt">Begin Hunt</string>
+    <string name="filler_hunt_description">A fun and family-friendly hike that will take you to the park\'s most scenic corners! All flowers can be found along trail.</string>
+    <string name="hunt_preview_start_hunt">Start the Hunt!</string>
 </resources>
