@@ -6,32 +6,20 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-
-import com.example.nature_hunt.db.local.LocalDatabase;
-import com.example.nature_hunt.db.local.LocalDatabaseAccessor;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nature_hunt.db.CloudDataRepository;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private static Context context;
 
     private static List<Hunt> searchList;
-    private static Map<Integer, Species> speciesMap;
-
-    private static LocalDatabase db;
-    private static LocalDatabaseAccessor dao;
+    ArrayList<HuntRecyclerItemModel> huntsInProgress;
+    ArrayList<HuntRecyclerItemModel> huntsCompleted;
+    HuntRecyclerAdapter huntsInProgressAdapter;
+    HuntRecyclerAdapter huntsCompletedAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("hunt", hunt);
                     try {
-                        InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -89,23 +77,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Populate both of these RecyclerViews with actual data from our databases
+        huntsInProgress = new ArrayList<>();
         RecyclerView huntsInProgressView = findViewById(R.id.homepage_hunts_in_progress_recycler_view);
-        ArrayList<HuntRecyclerItemModel> huntsInProgress = new ArrayList<HuntRecyclerItemModel>();
-        for (int i = 0; i < 5; i++) {
-            HuntRecyclerItemModel item = new HuntRecyclerItemModel();
-            item.setName("Hunt " + i);
-            item.setImage_drawable(R.drawable.stock_trail);
-            huntsInProgress.add(item);
-        }
-        final HuntRecyclerAdapter huntsInProgressAdapter = new HuntRecyclerAdapter(this, huntsInProgress);
+        huntsInProgressAdapter = new HuntRecyclerAdapter(this, huntsInProgress);
         huntsInProgressView.setAdapter(huntsInProgressAdapter);
         huntsInProgressView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         huntsInProgressView.addOnItemTouchListener(new RecyclerTouchListener(context, huntsInProgressView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                HuntRecyclerItemModel hunt = huntsInProgressAdapter.getItem(position);
-                Toast.makeText(context, hunt.getName()+ " is selected successfully", Toast.LENGTH_SHORT).show();
+                HuntRecyclerItemModel huntModel = huntsInProgressAdapter.getItem(position);
+                HuntProgressTracker previewFrag = HuntProgressTracker.newInstance(huntModel.getHunt());
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.add(android.R.id.content, previewFrag)
+                        .addToBackStack(null).commit();
             }
 
             @Override
@@ -115,16 +100,26 @@ public class MainActivity extends AppCompatActivity {
         }));
 
         RecyclerView huntsCompletedView = findViewById(R.id.homepage_hunts_completed_recycler_view);
-        ArrayList<HuntRecyclerItemModel> huntsCompleted = new ArrayList<HuntRecyclerItemModel>();
-        for (int i = 0; i < 5; i++) {
-            HuntRecyclerItemModel item = new HuntRecyclerItemModel();
-            item.setName("Completed Hunt " + i);
-            item.setImage_drawable(R.drawable.stock_trail);
-            huntsCompleted.add(item);
-        }
-        HuntRecyclerAdapter huntsCompletedAdapter = new HuntRecyclerAdapter(this, huntsCompleted);
+        huntsCompleted = new ArrayList<>();
+        huntsCompletedAdapter = new HuntRecyclerAdapter(this, huntsCompleted);
         huntsCompletedView.setAdapter(huntsCompletedAdapter);
         huntsCompletedView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        huntsCompletedView.addOnItemTouchListener(new RecyclerTouchListener(context, huntsCompletedView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                HuntRecyclerItemModel huntModel = huntsCompletedAdapter.getItem(position);
+                HuntProgressTracker previewFrag = HuntProgressTracker.newInstance(huntModel.getHunt());
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.add(android.R.id.content, previewFrag)
+                        .addToBackStack(null).commit();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
 
@@ -140,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
                         dataRepository.LoadData();
                     }
                     final Map<Integer, Hunt> huntsMap = CloudDataRepository.huntsMap;
-                    App.setSpeciesMap(CloudDataRepository.speciesMap);
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             for (Hunt hunt : huntsMap.values()) {
                                 searchList.add(hunt);
                             }
+
+                            LoadHunts();
                         }
                     });
                 } catch (final Exception e) {
@@ -170,5 +165,41 @@ public class MainActivity extends AppCompatActivity {
     public void addMapFragment(View view) {
         Intent mapActivity=new Intent(context, MapsActivity.class);
         startActivity(mapActivity);
+    }
+
+    private void LoadHunts()
+    {
+        RecyclerView huntsInProgressView = findViewById(R.id.homepage_hunts_in_progress_recycler_view);
+        RecyclerView huntsCompletedView = findViewById(R.id.homepage_hunts_completed_recycler_view);
+        for (Object huntId : App.getActiveHunts()) {
+            Hunt hunt = CloudDataRepository.huntsMap.get(huntId);
+            HuntRecyclerItemModel item = new HuntRecyclerItemModel();
+            item.setName(hunt.name());
+            item.setHunt(hunt);
+            item.setImage_drawable(R.drawable.stock_trail);
+
+            List<Integer> speciesListFound =  App.getDB().getSpeciesFoundFromHunt(hunt.id());
+            boolean completedHunt = true;
+            for (Species species: hunt.speciesList()) {
+                if (!speciesListFound.contains(species.id()))
+                {
+                    completedHunt = false;
+                    break;
+                }
+            }
+            if (completedHunt)
+            {
+                huntsCompleted.add(item);
+            }
+            else
+            {
+                huntsInProgress.add(item);
+            }
+        }
+        huntsInProgressAdapter.setList(context, huntsInProgress);
+        huntsInProgressView.setAdapter(huntsInProgressAdapter);
+
+        huntsCompletedAdapter.setList(context, huntsCompleted);
+        huntsCompletedView.setAdapter(huntsCompletedAdapter);
     }
 }

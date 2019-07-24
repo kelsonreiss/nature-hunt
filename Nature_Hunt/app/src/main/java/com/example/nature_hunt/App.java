@@ -64,4 +64,6 @@ public class App extends Application {
     }
 
     public static List getActiveHunts() { return dao.getActiveHunts(); }
+
+    public static void startHunt(Integer huntId) { dao.startHunt(huntId); }
 }
