@@ -14,6 +14,9 @@ public abstract class LocalDatabaseAccessor {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract void insert(HuntProgress huntProgress);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract void insert(ActiveHunts activeHunt);
+
     @Ignore
     public void markSpeciesAsFound(int huntId, int speciesId) {
         HuntProgress huntProgress = new HuntProgress();
@@ -21,6 +24,13 @@ public abstract class LocalDatabaseAccessor {
         huntProgress.speciesId = speciesId;
 
         insert(huntProgress);
+    }
+
+    @Ignore
+    public void startHunt(int huntId) {
+        ActiveHunts hunt = new ActiveHunts();
+        hunt.huntId = huntId;
+        insert(hunt);
     }
 
     @Query("DELETE FROM HuntProgress WHERE huntId == :huntId")

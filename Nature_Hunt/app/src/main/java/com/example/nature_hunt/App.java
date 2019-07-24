@@ -13,15 +13,17 @@ import com.example.nature_hunt.db.local.LocalDatabase;
 import com.example.nature_hunt.db.local.LocalDatabaseAccessor;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class App extends Application {
     private static ArrayList<Hunt> hunts;
-    private static Map<Integer, Hunt> huntsMap;
     private static Context context;
     private static LocalDatabase db;
     private static LocalDatabaseAccessor dao;
     private static Map<Integer, Species> speciesMap;
+    private static ArrayList<Hunt> huntsInProgress;
+    private static List<Integer> activeHunts;
 
     public App(){
     }
@@ -33,16 +35,12 @@ public class App extends Application {
         db = Room.databaseBuilder(context, LocalDatabase.class, "hunts.db").allowMainThreadQueries().build();
         dao = db.getAccessor();
         CloudDataRepository dataRepository = new CloudDataRepository(context);
+        activeHunts = dao.getActiveHunts();
         System.out.println("onCreate from App");
-//        PopulateHuntSearchList();
     }
 
     public static Context getAppContext() {
         return App.context;
-    }
-
-    public static Map<Integer, Hunt> getHuntsMap() {
-        return huntsMap;
     }
 
     public static void addHunt(Hunt hunt) {
@@ -64,4 +62,6 @@ public class App extends Application {
     public static Map<Integer, Species> getSpeciesMap(){
         return speciesMap;
     }
+
+    public static List getActiveHunts() { return dao.getActiveHunts(); }
 }
