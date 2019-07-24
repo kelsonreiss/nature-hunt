@@ -122,16 +122,10 @@ public class HuntPreviewFrag extends DialogFragment {
         return view;
     }
 
-<<<<<<< HEAD
     private ArrayList getData(){
         if (mHunt == null || mHunt.speciesList() == null || mHunt.speciesList().isEmpty()){
             ArrayList speciesList = new ArrayList<>();
-=======
-    private ArrayList<SpeciesRecyclerItemModel> getData() {
 
-        if (mHunt == null || mHunt.speciesList() == null){
-            ArrayList<SpeciesRecyclerItemModel> speciesList = new ArrayList<SpeciesRecyclerItemModel>();
->>>>>>> master
             for (int i = 0; i < stock_flower_ids.length; i++){
                 SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
                 model.setImage_drawable(stock_flower_ids[i]);

@@ -84,20 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 dispatchTakePictureIntent();
             }
         });
-<<<<<<< HEAD
-        seePreview = findViewById(R.id.preview_button);
-        seePreview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HuntPreviewFrag previewFrag = HuntPreviewFrag.newInstance();
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.add(android.R.id.content, previewFrag)
-                        .addToBackStack(getResources().getString(R.string.home_activity_tag)).commit();
-            }
-        });
-=======
->>>>>>> master
 
         searchList = new ArrayList<>();
         PopulateHuntSearchList();
