@@ -3,11 +3,13 @@ package com.example.nature_hunt;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -339,9 +341,35 @@ public class HuntProgressTracker extends DialogFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+//          (TODO: Change to markChecked(species_common)
+            markChecked(stock_flower_names[0]);
             Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    // Mark the image icon as checked
+    private void markChecked(String species_name){
+        int pos = -1;
+
+        // (TODO: Change this to mHunt.speciesList
+        for (int i = 0; i < stock_flower_names.length; i++){
+            if (species_name.equalsIgnoreCase(stock_flower_names[i])){
+                pos = i;
+            }
+        }
+
+        try {
+            if (pos != -1){
+                recyclerView.getChildAt(pos)
+                        .findViewById(R.id.vertical_image_view)
+                        .setForeground(ContextCompat.getDrawable(getContext(), R.drawable.checked_overlay));
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event
