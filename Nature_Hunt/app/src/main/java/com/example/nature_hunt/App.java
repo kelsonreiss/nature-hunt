@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class App extends Application {
     private static ArrayList<Hunt> hunts;
-    private static Map<Integer, Hunt> huntsMap;
     private static Context context;
     private static LocalDatabase db;
     private static LocalDatabaseAccessor dao;
@@ -42,10 +41,6 @@ public class App extends Application {
 
     public static Context getAppContext() {
         return App.context;
-    }
-
-    public static Map<Integer, Hunt> getHuntsMap() {
-        return huntsMap;
     }
 
     public static void addHunt(Hunt hunt) {
