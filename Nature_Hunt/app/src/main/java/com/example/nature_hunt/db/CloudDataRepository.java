@@ -1,7 +1,6 @@
 package com.example.nature_hunt.db;
 
 import android.content.Context;
-import android.os.Build;
 
 import com.example.nature_hunt.Species;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
@@ -10,29 +9,36 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class DatabaseWrapper  extends DatabaseAccessor{
+public class CloudDataRepository {
 
-    public DatabaseWrapper(Context context)
+    private  CloudDatabaseAccessor m_dbAccessor;
+
+    public static Map<Integer, com.example.nature_hunt.Hunt> huntsMap;
+    public static Map<Integer, ArrayList<Species>> huntSpeciesMap;
+    public static Map<Integer, Species> speciesMap;
+
+    public CloudDataRepository(Context context)
     {
-        super(context);
+        m_dbAccessor = new CloudDatabaseAccessor(context);
     }
 
-    public Map<Integer, com.example.nature_hunt.Hunt> getHuntsMap() throws MobileServiceException, ExecutionException, InterruptedException {
+    public void LoadData() throws InterruptedException, ExecutionException, MobileServiceException {
+        LoadSpeciesMap();
+        LoadHuntSpeciesMap();
+        LoadHuntsMap();
+    }
+
+    private void LoadHuntsMap() throws MobileServiceException, ExecutionException, InterruptedException {
 
         // Get the DB records from the Hunts DB table
-        MobileServiceTable<Hunt> huntTable = getHuntTable();
+        MobileServiceTable<Hunt> huntTable = m_dbAccessor.getHuntTable();
         MobileServiceList<Hunt> huntsDB = huntTable.execute().get();
 
-        // Get the HuntSpeciesMap to get species list corresponding to each hunt
-        Map<Integer, ArrayList<Species>> huntSpeciesMap = getHuntSpeciesMap();
-
         // Loop through all the DB records to populate the Hunts map
-        Map<Integer, com.example.nature_hunt.Hunt> huntsMap = new HashMap<>();
+        huntsMap = new HashMap<>();
         for (Hunt huntDB: huntsDB ) {
             Integer huntId = huntDB.getId();
             com.example.nature_hunt.Hunt huntBO = new com.example.nature_hunt.Hunt(
@@ -43,20 +49,16 @@ public class DatabaseWrapper  extends DatabaseAccessor{
             );
             huntsMap.put(huntId, huntBO);
         }
-        return huntsMap;
     }
 
-    public Map<Integer, ArrayList<Species>> getHuntSpeciesMap() throws MobileServiceException, ExecutionException, InterruptedException {
+    private void LoadHuntSpeciesMap() throws MobileServiceException, ExecutionException, InterruptedException {
 
         // Get the DB records from the HuntSpeciesMap table
-        MobileServiceTable<SpeciesPerHunt> huntSpeciesMapTable = getSpeciesPerHuntTable();
+        MobileServiceTable<SpeciesPerHunt> huntSpeciesMapTable = m_dbAccessor.getSpeciesPerHuntTable();
         MobileServiceList<SpeciesPerHunt> huntsSpeciesMapDB = huntSpeciesMapTable.execute().get();
 
-        // Get SpeciesMap to join with this result
-        Map<Integer, Species> speciesMap = getSpeciesMap();
-
         // Loop through all the records to populate the hunt species map
-        Map<Integer, ArrayList<Species>> huntSpeciesMap = new HashMap<>();
+        huntSpeciesMap = new HashMap<>();
 
         for (SpeciesPerHunt speciesPerHunt: huntsSpeciesMapDB)
         {
@@ -75,16 +77,15 @@ public class DatabaseWrapper  extends DatabaseAccessor{
                 huntSpeciesMap.put(huntId, speciesList);
             }
         }
-        return  huntSpeciesMap;
     }
 
-    public Map<Integer, Species> getSpeciesMap() throws MobileServiceException, ExecutionException, InterruptedException {
+    private void LoadSpeciesMap() throws MobileServiceException, ExecutionException, InterruptedException {
         // Get the DB records from the HuntSpeciesMap table
-        MobileServiceTable<com.example.nature_hunt.db.Species> speciesTable = getSpeciesTable();
+        MobileServiceTable<com.example.nature_hunt.db.Species> speciesTable = m_dbAccessor.getSpeciesTable();
         MobileServiceList<com.example.nature_hunt.db.Species> speciesDBList = speciesTable.execute().get();
 
         // Loop through all the records to populate the hunt species map
-        Map<Integer, Species> speciesMap = new HashMap<>();
+        speciesMap = new HashMap<>();
 
         for (com.example.nature_hunt.db.Species speciesDB: speciesDBList ) {
             Species species = new Species(
@@ -100,7 +101,5 @@ public class DatabaseWrapper  extends DatabaseAccessor{
                     );
             speciesMap.put(speciesDB.getId(), species);
         }
-
-        return  speciesMap;
     }
 }
