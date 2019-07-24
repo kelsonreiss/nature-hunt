@@ -109,10 +109,10 @@ public class HuntPreviewFrag extends DialogFragment {
         return view;
     }
 
-    private ArrayList getData(){
+    private ArrayList<SpeciesRecyclerItemModel> getData() {
 
         if (mHunt == null || mHunt.speciesList() == null){
-            ArrayList speciesList = new ArrayList<>();
+            ArrayList<SpeciesRecyclerItemModel> speciesList = new ArrayList<SpeciesRecyclerItemModel>();
             for (int i = 0; i < stock_flower_ids.length; i++){
                 SpeciesRecyclerItemModel model = new SpeciesRecyclerItemModel();
                 model.setImage_drawable(stock_flower_ids[i]);
@@ -122,7 +122,14 @@ public class HuntPreviewFrag extends DialogFragment {
             return speciesList;
         }
 
-        return mHunt.speciesList();
+        ArrayList<SpeciesRecyclerItemModel> speciesList = new ArrayList<SpeciesRecyclerItemModel>();
+        for (Species species : mHunt.speciesList()) {
+            SpeciesRecyclerItemModel speciesItem = new SpeciesRecyclerItemModel();
+            speciesItem.setName(species.commonName());
+            speciesItem.setImage_drawable(R.drawable.flower);
+            speciesList.add(speciesItem);
+        }
+        return speciesList;
     }
 
     @Override

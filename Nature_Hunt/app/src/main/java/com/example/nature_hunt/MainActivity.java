@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 5; i++) {
             HuntRecyclerItemModel item = new HuntRecyclerItemModel();
             item.setName("Hunt " + i);
-            item.setImage_drawable(R.mipmap.stock_trail);
+            item.setImage_drawable(R.drawable.stock_trail);
             huntsInProgress.add(item);
         }
         HuntRecyclerAdapter huntsInProgressAdapter = new HuntRecyclerAdapter(this, huntsInProgress);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 5; i++) {
             HuntRecyclerItemModel item = new HuntRecyclerItemModel();
             item.setName("Completed Hunt " + i);
-            item.setImage_drawable(R.mipmap.stock_trail);
+            item.setImage_drawable(R.drawable.stock_trail);
             huntsCompleted.add(item);
         }
         HuntRecyclerAdapter huntsCompletedAdapter = new HuntRecyclerAdapter(this, huntsCompleted);
