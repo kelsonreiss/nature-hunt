@@ -72,12 +72,13 @@
                 android:id="@+id/more_info_prog_frag_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
+                android:layout_marginRight="1dp"
                 android:backgroundTint="#FFFFFF"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
                 android:src="@android:drawable/ic_dialog_info"
-                android:tint="@android:color/black" />
+                android:tint="#2196F3" />
 
         </RelativeLayout>
 
@@ -134,12 +135,17 @@
             android:id="@+id/launch_cam_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:clickable="true"
             android:focusable="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:layout_alignParentRight="true"
             android:padding="20dp"
+            app:borderWidth="0dp"
+            app:elevation="12dp"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
 
