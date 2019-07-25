@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,6 @@ public class HuntProgressTracker extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String HUNT_ARG = "hunt";
-    private static final String SPECIES_FOUND_ARG = "speciesFound";
     private VerticalSpeciesRecyclerAdapter adapter;
     private ArrayList<SpeciesRecyclerItemModel> models;
     private MoreInfoDialogFrag moreInfoDialogFrag;
@@ -65,6 +65,8 @@ public class HuntProgressTracker extends DialogFragment {
     LinearLayout progress_dialog;
 
     private FloatingActionButton camButton;
+    private ProgressBar progressBar;
+    private TextView progressText;
 
     static final int REQUEST_TAKE_PHOTO = 1;
 
@@ -84,13 +86,10 @@ public class HuntProgressTracker extends DialogFragment {
     };
 
     String[] stock_flower_names = {"Daffodil", "House Sparrow", "Hibiscus", "Maidenhair", "Maple", "White Spruce"};
-
-
     private Hunt mHunt;
     private List<Species> speciesList;
     private List<Integer> currentSpeciesFound;
     private HashMap<Integer, Species> speciesMap;
-    private HashMap<String, Integer> commonNameToSpeciesID;
     private LocalDatabaseAccessor dbAccessor;
 
     private HuntProgressTracker() {
@@ -183,21 +182,34 @@ public class HuntProgressTracker extends DialogFragment {
                 dispatchTakePictureIntent();
             }
         });
+
+
+        // Progress Bar
+        progressBar = view.findViewById(R.id.progressBar);
+        progressText = view.findViewById(R.id.fraction_progress_text);
+        updateProgressVisuals();
         return view;
     }
 
-    public void markFound(Integer huntID, Integer speciesID){
-        Species species = getSpeciesFromID(4);
-        List found = dbAccessor.getSpeciesFoundFromHunt(4);
-        dbAccessor.markSpeciesAsFound(huntID, speciesID);
-        found = dbAccessor.getSpeciesFoundFromHunt(4);
+    private void updateProgressVisuals(){
+        int numTotal = mHunt.speciesList().size();
+        int numCurrent = currentSpeciesFound.size();
+
+        if(null != progressBar){
+            progressBar.setProgress(numCurrent);
+            progressBar.setMax(numTotal);
+        }
+        if(null != progressText){
+            progressText.setText(numCurrent + " / " + numTotal);
+        }
     }
 
     private boolean validateResult(String commonName){
         if(!commonName.isEmpty()){
-            for(Species species : this.mHunt.speciesList()){
-                if(species.commonName().toLowerCase() == commonName){
-                    App.getDB().markSpeciesAsFound(this.mHunt.id(), species.id());
+            ArrayList<Species> speciesList = mHunt.speciesList();
+            for(int i = 0; i <= mHunt.speciesList().size(); i++){
+                if(commonName.equals(speciesList.get(i).commonName().toLowerCase())){
+                    App.getDB().markSpeciesAsFound(this.mHunt.id(), speciesList.get(i).id());
                 }
                 return true;
             }
@@ -415,6 +427,7 @@ public class HuntProgressTracker extends DialogFragment {
             boolean validResult = validateResult(species_common);
             System.out.println("validateResult: " + validResult);
             if(validResult) {
+                updateProgressVisuals();
                 markChecked(stock_flower_names[0]);
             }
             Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
@@ -445,43 +458,4 @@ public class HuntProgressTracker extends DialogFragment {
         }
 
     }
-
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
 }
