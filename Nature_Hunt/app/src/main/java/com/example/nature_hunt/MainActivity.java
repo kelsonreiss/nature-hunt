@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     {
         RecyclerView huntsInProgressView = findViewById(R.id.homepage_hunts_in_progress_recycler_view);
         RecyclerView huntsCompletedView = findViewById(R.id.homepage_hunts_completed_recycler_view);
+        App.getDB().startHunt(1);
         for (Object huntId : App.getActiveHunts()) {
             Hunt hunt = CloudDataRepository.huntsMap.get(huntId);
             HuntRecyclerItemModel item = new HuntRecyclerItemModel();

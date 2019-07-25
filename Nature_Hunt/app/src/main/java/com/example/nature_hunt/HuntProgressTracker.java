@@ -82,15 +82,18 @@ public class HuntProgressTracker extends DialogFragment {
 
     // Stock Images + Names to use as backups
     Integer[] stock_flower_ids = {
-            R.drawable.daffodil, R.drawable.flower, R.drawable.hibiscus, R.drawable.maidenhair, R.drawable.maple, R.drawable.white_spruce
+            R.drawable.daffodil, R.drawable.flower, R.drawable.hibiscus, R.drawable.maidenhair, R.drawable.maple
     };
 
-    String[] stock_flower_names = {"Daffodil", "House Sparrow", "Hibiscus", "Maidenhair", "Maple", "White Spruce"};
+
+    String[] stock_flower_names = {"Daffodil", "House Sparrow", "Lesser Burdock", "Venus Thistle", "Purple Dwarf Olive"};
     private Hunt mHunt;
     private List<Species> speciesList;
     private List<Integer> currentSpeciesFound;
     private HashMap<Integer, Species> speciesMap;
     private LocalDatabaseAccessor dbAccessor;
+    private int numCurrentFoundSpecies;
+    private int numTotalSpecies;
 
     private HuntProgressTracker() {
         // Required empty public constructor
@@ -187,31 +190,34 @@ public class HuntProgressTracker extends DialogFragment {
         // Progress Bar
         progressBar = view.findViewById(R.id.progressBar);
         progressText = view.findViewById(R.id.fraction_progress_text);
-        updateProgressVisuals();
+        numTotalSpecies = mHunt.speciesList().size();
+        numCurrentFoundSpecies = currentSpeciesFound.size();
+        progressBar.setProgress(numCurrentFoundSpecies);
+        progressText.setText(numCurrentFoundSpecies + " / " + numTotalSpecies);
+        // Checks for previous progress
+        updateMarkChecked();
         return view;
     }
 
     private void updateProgressVisuals(){
-        int numTotal = mHunt.speciesList().size();
-        int numCurrent = currentSpeciesFound.size();
-
+        numCurrentFoundSpecies += 1;
         if(null != progressBar){
-            progressBar.setProgress(numCurrent);
-            progressBar.setMax(numTotal);
+            progressBar.setProgress(numCurrentFoundSpecies);
         }
         if(null != progressText){
-            progressText.setText(numCurrent + " / " + numTotal);
+            progressText.setText(numCurrentFoundSpecies + " / " + numTotalSpecies);
         }
     }
 
-    private boolean validateResult(String commonName){
-        if(!commonName.isEmpty()){
+    private boolean validateResult(ArrayList<String> predictions){
+        if(!predictions.isEmpty()){
             ArrayList<Species> speciesList = mHunt.speciesList();
             for(int i = 0; i <= mHunt.speciesList().size(); i++){
-                if(commonName.equals(speciesList.get(i).commonName().toLowerCase())){
+                if(predictions.contains(speciesList.get(i).commonName().toLowerCase())){
                     App.getDB().markSpeciesAsFound(this.mHunt.id(), speciesList.get(i).id());
+                    markChecked(i);
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -285,7 +291,7 @@ public class HuntProgressTracker extends DialogFragment {
         HttpURLConnection connection = null;
         File file = new File(filepath);
         FileInputStream fileInputStream = new FileInputStream(file);
-        URL url = new URL("https://aiforearth.azure-api.net/species-recognition/v0.1/predict?predictMode=classifyOnly");
+        URL url = new URL("https://aiforearth.azure-api.net/species-recognition/v0.1/predict?topK=5&predictMode=classifyOnly");
         connection = (HttpURLConnection) url.openConnection();
         connection.setDoInput(true);
         connection.setDoOutput(true);
@@ -406,13 +412,14 @@ public class HuntProgressTracker extends DialogFragment {
             System.out.println(result);
             String confidence = "";
             String species_common = "";
+            ArrayList<String> predictions = new ArrayList<>();
             try {
                 JSONObject jObject = new JSONObject(result);
                 JSONArray jArray = jObject.getJSONArray("predictions");
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jObject2 = jArray.getJSONObject(i);
-                    confidence = jObject2.getString("confidence");
                     species_common = jObject2.getString("species_common");
+                    predictions.add(species_common.toLowerCase());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -424,31 +431,30 @@ public class HuntProgressTracker extends DialogFragment {
 //          (TODO: Change to markChecked(species_common)
             // Validate returns a boolean to indicate success
 //            boolean validResult = validate(species_common);
-            boolean validResult = validateResult(species_common);
+            boolean validResult = validateResult(predictions);
             System.out.println("validateResult: " + validResult);
             if(validResult) {
                 updateProgressVisuals();
-                markChecked(stock_flower_names[0]);
             }
-            Toast toast = Toast.makeText(context, "Confidence: " + confidence + "\n" + "Species Common: " + species_common, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, "Species Common: " + species_common, Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
-    // Mark the image icon as checked
-    private void markChecked(String species_name){
-        int pos = -1;
-
-        // (TODO: Change this to mHunt.speciesList
-        for (int i = 0; i < stock_flower_names.length; i++){
-            if (species_name.equalsIgnoreCase(stock_flower_names[i])){
-                pos = i;
+    private void updateMarkChecked(){
+        currentSpeciesFound = dbAccessor.getSpeciesFoundFromHunt(mHunt.id());
+        for(int i = 0; i < mHunt.speciesList().size(); i++){
+            if(currentSpeciesFound.contains(mHunt.speciesList().get(i).id())){
+                markChecked(i);
             }
         }
+    }
 
+    // Mark the image icon as checked
+    private void markChecked(int index){
         try {
-            if (pos != -1){
-                recyclerView.getChildAt(pos)
+            if (index != -1){
+                recyclerView.getChildAt(index)
                         .findViewById(R.id.vertical_image_view)
                         .setForeground(ContextCompat.getDrawable(getContext(), R.drawable.checked_overlay));
 
