@@ -212,7 +212,7 @@ public class HuntProgressTracker extends DialogFragment {
     private boolean validateResult(ArrayList<String> predictions){
         if(!predictions.isEmpty()){
             ArrayList<Species> speciesList = mHunt.speciesList();
-            for(int i = 0; i <= mHunt.speciesList().size(); i++){
+            for(int i = 0; i < mHunt.speciesList().size(); i++){
                 if(predictions.contains(speciesList.get(i).commonName().toLowerCase())){
                     App.getDB().markSpeciesAsFound(this.mHunt.id(), speciesList.get(i).id());
                     markChecked(i);
