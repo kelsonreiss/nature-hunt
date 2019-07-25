@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static java.lang.Double.parseDouble;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -94,7 +97,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         @Override
                         public void run() {
                             for (Hunt hunt: CloudDataRepository.huntsMap.values()) {
-                                LatLng markerCoordinates = new LatLng(hunt.coords().first, hunt.coords().second);
+                                String[] values = hunt.coords().split(",");
+                                LatLng markerCoordinates = new LatLng(parseDouble(values[0]), parseDouble(values[1]));
                                 Marker marker = mMap.addMarker(new MarkerOptions().position(markerCoordinates).title(hunt.name()));
                                 marker.setTag(hunt);
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(markerCoordinates));

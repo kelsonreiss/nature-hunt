@@ -21,6 +21,11 @@ public class HuntRecyclerAdapter extends RecyclerView.Adapter<HuntRecyclerAdapte
         this.huntList = models;
     }
 
+    public void setList(Context context, ArrayList<HuntRecyclerItemModel> models){
+        inflater = LayoutInflater.from(context);
+        this.huntList = models;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +44,10 @@ public class HuntRecyclerAdapter extends RecyclerView.Adapter<HuntRecyclerAdapte
     @Override
     public int getItemCount() {
         return huntList.size();
+    }
+
+    public HuntRecyclerItemModel getItem(int position) {
+        return huntList.get(position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

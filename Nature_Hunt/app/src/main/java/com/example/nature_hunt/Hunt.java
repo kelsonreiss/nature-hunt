@@ -36,8 +36,8 @@ public class Hunt implements Serializable {
     // Pair representing latitude and longitude coordinates
     // Negative value represents South / West
     // i.e. <40.682932, -124.039570>
-    private Pair<Double, Double> m_coords;
-    public Pair<Double, Double> coords() {
+    private String m_coords;
+    public String coords() {
         return m_coords;
     }
 
@@ -70,8 +70,7 @@ public class Hunt implements Serializable {
 
     public Hunt(Integer id, String name, String friendly_location, String coords, ArrayList<Species> species_list){
         this(id, name, friendly_location, species_list);
-        String[] values = coords.split(",");
-        this.m_coords = new Pair<>(parseDouble(values[0]), parseDouble(values[1]));
+        this.m_coords = coords;
     }
 
     public Hunt(Integer id, String name, String friendly_location, String coords, ArrayList<Species> species_list, String header_image_url){
