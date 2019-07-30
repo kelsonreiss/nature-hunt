@@ -1,14 +1,9 @@
 package com.example.nature_hunt;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,15 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HuntPreviewFrag extends DialogFragment {
 
@@ -34,6 +28,11 @@ public class HuntPreviewFrag extends DialogFragment {
     RecyclerView recyclerView;
     private Hunt mHunt;
     private Button startHuntBtn;
+
+    private Integer[] stockTrailImages =
+            {R.drawable.base_of_tree, R.drawable.leaves_against_sky, R.drawable.open_park,
+                    R.drawable.park_with_bench, R.drawable.tree_canopy, R.drawable.tree_close_up,
+                    R.drawable.worn_path, R.drawable.stock_trail};
 
     // Stock Images + Names to use as backups
     Integer[] stock_flower_ids = {
@@ -93,6 +92,9 @@ public class HuntPreviewFrag extends DialogFragment {
             }
         }
 
+        ImageView huntImage = (ImageView) view.findViewById(R.id.hunt_preview_image);
+        huntImage.setImageResource(getRandomImage());
+
         startHuntBtn = (Button) view.findViewById(R.id.hunt_start_btn);
         startHuntBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +128,11 @@ public class HuntPreviewFrag extends DialogFragment {
         return view;
     }
 
+    private int getRandomImage(){
+        Random random = new Random();
+        return stockTrailImages[random.nextInt(stockTrailImages.length)];
+    }
+
     private ArrayList getData(){
 
 
@@ -154,7 +161,7 @@ public class HuntPreviewFrag extends DialogFragment {
 //        for (Species species : mHunt.speciesList()) {
 //            SpeciesRecyclerItemModel speciesItem = new SpeciesRecyclerItemModel();
 //            speciesItem.setName(species.commonName());
-//            speciesItem.setImage_drawable(R.drawable.flower);
+//            speciesItem.setImage_drawable(R.drawable.flower_background);
 //            speciesList.add(speciesItem);
 //        }
 //        return speciesList;

@@ -24,6 +24,7 @@ import com.example.nature_hunt.db.CloudDataRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<HuntRecyclerItemModel> huntsCompleted;
     HuntRecyclerAdapter huntsInProgressAdapter;
     HuntRecyclerAdapter huntsCompletedAdapter;
+
+    private Integer[] stockTrailImages =
+            {R.drawable.base_of_tree, R.drawable.leaves_against_sky, R.drawable.open_park,
+                    R.drawable.park_with_bench, R.drawable.tree_canopy, R.drawable.tree_close_up,
+                    R.drawable.worn_path, R.drawable.stock_trail};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             HuntRecyclerItemModel item = new HuntRecyclerItemModel();
             item.setName(hunt.name());
             item.setHunt(hunt);
-            item.setImage_drawable(R.drawable.stock_trail);
+            item.setImage_drawable(getDrawableID());
 
             List<Integer> speciesListFound =  App.getDB().getSpeciesFoundFromHunt(hunt.id());
             boolean completedHunt = true;
@@ -203,5 +210,10 @@ public class MainActivity extends AppCompatActivity {
 
         huntsCompletedAdapter.setList(context, huntsCompleted);
         huntsCompletedView.setAdapter(huntsCompletedAdapter);
+    }
+
+    private int getDrawableID(){
+        Random random = new Random();
+        return stockTrailImages[random.nextInt(stockTrailImages.length)];
     }
 }
