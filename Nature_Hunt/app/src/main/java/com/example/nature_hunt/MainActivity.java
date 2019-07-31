@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         searchList = new ArrayList<>();
         LoadCloudDataRepository();
-        AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
+        final AutoCompleteTextView textView = findViewById(R.id.HuntsSearchBar);
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    // Clear text after clicking
+                    textView.setText("");
 
                     HuntPreviewFrag previewFrag = HuntPreviewFrag.newInstance();
                     previewFrag.setArguments(bundle);
